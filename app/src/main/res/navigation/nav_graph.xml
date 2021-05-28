@@ -11,9 +11,17 @@
     <fragment
         android:id="@+id/taskFragment"
         android:name="com.example.atomichabits.ui.task.TaskFragment"
-        android:label="TaskFragment" />
+        android:label="TaskFragment" >
+        <action
+            android:id="@+id/action_taskFragment_to_uploadTaskFragment"
+            app:destination="@id/uploadTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.atomichabits.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/uploadTaskFragment"
+        android:name="com.example.atomichabits.ui.uploadtask.UploadTaskFragment"
+        android:label="UploadTaskFragment" />
 </navigation>

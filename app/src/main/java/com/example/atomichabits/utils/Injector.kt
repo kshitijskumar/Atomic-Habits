@@ -2,6 +2,7 @@ package com.example.atomichabits.utils
 
 import com.example.atomichabits.data.api.ApiService
 import com.example.atomichabits.data.repository.AuthRepository
+import com.example.atomichabits.data.repository.UserRepository
 
 class Injector private constructor() {
 
@@ -9,6 +10,7 @@ class Injector private constructor() {
 
     //repositories
     private var authRepo: AuthRepository? = null
+    private var userRepo: UserRepository? = null
 
     fun provideApiService() : ApiService {
         if(apiService == null) {
@@ -25,6 +27,15 @@ class Injector private constructor() {
 
         return authRepo!!
     }
+
+    fun provideUserRepo() : UserRepository {
+        if(userRepo == null) {
+            userRepo = UserRepository()
+        }
+
+        return userRepo!!
+    }
+
 
 
     companion object {

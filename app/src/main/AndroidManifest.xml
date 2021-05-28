@@ -3,6 +3,8 @@
     package="com.example.atomichabits">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +21,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <provider
+            android:authorities="com.example.atomichabits.ui.uploadtask"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>
