@@ -2,7 +2,6 @@ package com.example.atomichabits.data.repository
 
 import com.example.atomichabits.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -22,7 +21,7 @@ abstract class BaseRepository {
                 emit(Resource.Error("Api called successfully but no response in return."))
             }
         }else {
-            emit(Resource.Error("Something unexpected occurred!"))
+            emit(Resource.Error("Please check you email and password."))
         }
 
     }
