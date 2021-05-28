@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".SignupActivity"/>
         <provider
             android:authorities="com.example.atomichabits.ui.uploadtask"
             android:name="androidx.core.content.FileProvider"

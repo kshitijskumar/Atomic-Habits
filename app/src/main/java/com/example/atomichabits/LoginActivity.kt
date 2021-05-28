@@ -49,10 +49,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupViews() {
         binding.btnLogin.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             viewModel.loginExistingUser(email, password)
+        }
+
+        binding.gotoSignup.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
         }
     }
 

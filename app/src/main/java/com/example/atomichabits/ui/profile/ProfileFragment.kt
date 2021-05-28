@@ -1,6 +1,5 @@
 package com.example.atomichabits.ui.profile
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,6 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding get() = _binding!!
-
-    private val sharedPref by lazy {
-        requireActivity().getPreferences(MODE_PRIVATE)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

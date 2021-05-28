@@ -3,6 +3,7 @@ package com.example.atomichabits.viewmodels
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.example.atomichabits.data.models.LoginModel
+import com.example.atomichabits.data.models.SignupModel
 import com.example.atomichabits.data.repository.AuthRepository
 import com.example.atomichabits.data.response.LoginResponse
 import com.example.atomichabits.utils.Injector
@@ -17,6 +18,9 @@ class AuthViewModel(
 
     private val _loginState = MutableLiveData<Resource<LoginResponse>>()
     val loginState : LiveData<Resource<LoginResponse>> = _loginState
+
+    private val _signupState = MutableLiveData<Resource<Any>>()
+    val signupState: LiveData<Resource<Any>> = _signupState
 
     fun loginExistingUser(
         email: String?,
@@ -34,6 +38,37 @@ class AuthViewModel(
                     LoginModel(email, password)
                 ).collect {
                     _loginState.postValue(it)
+                }
+            }
+        }
+    }
+
+    fun signupNewUser(
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) = viewModelScope.launch {
+        _signupState.postValue(Resource.Loading)
+        when {
+            name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() -> {
+                _signupState.postValue(Resource.Error("Please fill all the fields"))
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                _signupState.postValue(Resource.Error("Please enter a valid email."))
+            }
+            password != confirmPassword -> {
+                _signupState.postValue(Resource.Error("Password and ConfirmPassword doesn't match."))
+            }
+            else -> {
+                repo.signupNewUser(
+                    SignupModel(
+                        name,
+                        email,
+                        password
+                    )
+                ).collect {
+                    _signupState.postValue(it)
                 }
             }
         }

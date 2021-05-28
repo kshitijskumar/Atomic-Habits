@@ -3,7 +3,7 @@ package com.example.atomichabits
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -32,9 +32,19 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.feedFragment -> setupToolBarTitle("Feed")
-                R.id.taskFragment -> setupToolBarTitle("Task")
-                R.id.profileFragment -> setupToolBarTitle("Profile")
+                R.id.feedFragment -> {
+                    setupToolBarTitle("Feed")
+                    binding.bottomNavView.visibility = View.VISIBLE
+                }
+                R.id.taskFragment -> {
+                    setupToolBarTitle("Task")
+                    binding.bottomNavView.visibility = View.VISIBLE
+                }
+                R.id.profileFragment -> {
+                    setupToolBarTitle("Profile")
+                    binding.bottomNavView.visibility = View.VISIBLE
+                }
+                R.id.uploadTaskFragment -> binding.bottomNavView.visibility = View.GONE
             }
         }
     }
