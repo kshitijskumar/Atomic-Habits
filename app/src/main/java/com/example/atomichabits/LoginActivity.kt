@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupPreferences() {
-        sharedPreferences = getPreferences(MODE_PRIVATE)
+        sharedPreferences = applicationContext.getSharedPreferences("USER_STATUS", MODE_PRIVATE)
     }
 
     private fun setupViewModel() {
