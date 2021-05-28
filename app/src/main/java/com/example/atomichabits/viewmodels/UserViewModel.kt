@@ -1,5 +1,6 @@
 package com.example.atomichabits.viewmodels
 
+import android.net.Uri
 import androidx.lifecycle.*
 import com.example.atomichabits.data.repository.UserRepository
 import com.example.atomichabits.data.response.ActivityResponse
@@ -18,6 +19,9 @@ class UserViewModel(
     private val _activity = MutableLiveData<Resource<ActivityResponse>>()
     val activity: LiveData<Resource<ActivityResponse>> = _activity
 
+    private val _upload = MutableLiveData<Resource<Any>>()
+    val upload: LiveData<Resource<Any>> = _upload
+
     init {
         if(isTask) {
             getRandomTask()
@@ -27,6 +31,18 @@ class UserViewModel(
     private fun getRandomTask() = viewModelScope.launch {
         repo.getARandomActivity().collect {
             _activity.postValue(it)
+        }
+    }
+
+    fun uploadActivity(uri: Uri?, caption: String) = viewModelScope.launch {
+        when{
+            uri == null -> _upload.postValue(Resource.Error("Please select an imaage"))
+            caption.isEmpty() -> _upload.postValue(Resource.Error("Please share your experience"))
+            else -> {
+                repo.uploadActivity().collect {
+                    _upload.postValue(it)
+                }
+            }
         }
     }
 

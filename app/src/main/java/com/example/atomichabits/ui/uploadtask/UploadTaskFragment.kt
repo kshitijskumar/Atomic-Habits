@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.atomichabits.databinding.FragmentUploadTaskBinding
+import com.example.atomichabits.utils.Resource
+import com.example.atomichabits.utils.UtilFunctions.showToast
+import com.example.atomichabits.viewmodels.UserViewModel
 import java.io.File
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -20,6 +24,10 @@ class UploadTaskFragment : Fragment() {
 
     private var _binding: FragmentUploadTaskBinding? = null
     private val binding: FragmentUploadTaskBinding get() = _binding!!
+
+    private val viewModel by lazy {
+        UserViewModel.getUserViewModel(this, false)
+    }
 
     lateinit var imagePath: String
     private var uri: Uri? = null
@@ -35,7 +43,7 @@ class UploadTaskFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUploadTaskBinding.inflate(inflater)
         return binding.root
     }
@@ -43,8 +51,14 @@ class UploadTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeValues()
+
         binding.btnClick.setOnClickListener {
             dispatchTakePicture()
+        }
+        binding.btnUpload.setOnClickListener {
+            val caption = binding.etExperience.text.toString()
+            viewModel.uploadActivity(uri, caption)
         }
     }
 
@@ -77,6 +91,19 @@ class UploadTaskFragment : Fragment() {
             )
             uri = photoUri
             takePhoto.launch(photoUri)
+        }
+    }
+
+    private fun observeValues() {
+        viewModel.upload.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    requireContext().showToast("Upload successfully.")
+                    findNavController().navigateUp()
+                }
+                is Resource.Error -> requireContext().showToast(it.errorMsg)
+                is Resource.Loading -> requireContext().showToast("Please wait while we upload.")
+            }
         }
     }
 
