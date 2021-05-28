@@ -19,7 +19,7 @@ class Injector private constructor() {
     companion object {
         var instance: Injector? = null
 
-        fun getInjector() : Injector {
+        fun getInstance() : Injector {
             if(instance == null) {
                 instance = Injector()
             }
