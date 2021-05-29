@@ -60,6 +60,12 @@ class UserViewModel(
         }
     }
 
+    fun getAllPosts() = viewModelScope.launch {
+        repo.getAllPosts().collect {
+            _posts.postValue(it)
+        }
+    }
+
 
 
     companion object {

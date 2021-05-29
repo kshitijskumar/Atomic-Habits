@@ -24,4 +24,8 @@ class UserRepository(
     suspend fun fetchUserDetails() = safeApiCall {
         api.getUserDetails()
     }
+
+    suspend fun getAllPosts() = safeApiCall {
+        api.getAllPosts()
+    }
 }

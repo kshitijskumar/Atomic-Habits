@@ -4,6 +4,7 @@ import com.example.atomichabits.data.models.LoginModel
 import com.example.atomichabits.data.models.SignupModel
 import com.example.atomichabits.data.response.ActivityResponse
 import com.example.atomichabits.data.response.LoginResponse
+import com.example.atomichabits.data.response.PostResponse
 import com.example.atomichabits.data.response.UserResponse
 import com.example.atomichabits.utils.Constants.BASE_URL
 import com.example.atomichabits.utils.Injector
@@ -37,7 +38,7 @@ interface ApiService {
     @GET("feed")
     suspend fun getAllPosts(
         @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
-    ) : Response<Any>
+    ) : Response<List<PostResponse>>
 
     companion object {
         private val okHttpClient = OkHttpClient.Builder()

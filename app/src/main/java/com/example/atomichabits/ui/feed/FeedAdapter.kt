@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.atomichabits.data.response.PostResponse
 import com.example.atomichabits.databinding.HolderPostBinding
+import kotlin.random.Random
 
 class FeedAdapter : ListAdapter<PostResponse, FeedAdapter.FeedViewHolder>(diffUtil) {
 
@@ -28,17 +30,21 @@ class FeedAdapter : ListAdapter<PostResponse, FeedAdapter.FeedViewHolder>(diffUt
             }
 
             override fun areContentsTheSame(oldItem: PostResponse, newItem: PostResponse): Boolean {
-                return oldItem.img == newItem.img
+                return oldItem._id == newItem._id
             }
         }
     }
 
-    class FeedViewHolder(val binding: HolderPostBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FeedViewHolder(private val binding: HolderPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindViews(item: PostResponse) {
             binding.apply {
-                tvUser.text = item.name
-                tvCaption.text = item.caption
+                tvUser.text = item.username
+                tvCaption.text = item.title
+                tvClaps.text = Random.nextInt(0, 20).toString()
             }
+            Glide.with(binding.root.context)
+                .load(item.image)
+                .into(binding.ivImage)
         }
     }
 }

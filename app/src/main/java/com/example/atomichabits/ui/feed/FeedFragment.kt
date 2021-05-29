@@ -37,9 +37,10 @@ class FeedFragment : Fragment() {
 
         setupRecyclerView()
         observeValues()
+        viewModel.getAllPosts()
 
         binding.swipeRefresh.setOnRefreshListener {
-            //fetch post function from viewmodel
+            viewModel.getAllPosts()
         }
     }
 
