@@ -21,7 +21,7 @@ abstract class BaseRepository {
                 emit(Resource.Error("Api called successfully but no response in return."))
             }
         }else {
-            emit(Resource.Error("Please check you email and password."))
+            emit(Resource.Error("Something unexpected happened."))
         }
 
     }

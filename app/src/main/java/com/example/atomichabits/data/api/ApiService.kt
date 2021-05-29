@@ -4,7 +4,9 @@ import com.example.atomichabits.data.models.LoginModel
 import com.example.atomichabits.data.models.SignupModel
 import com.example.atomichabits.data.response.ActivityResponse
 import com.example.atomichabits.data.response.LoginResponse
+import com.example.atomichabits.data.response.UserResponse
 import com.example.atomichabits.utils.Constants.BASE_URL
+import com.example.atomichabits.utils.Injector
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -12,19 +14,32 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiService {
 
 
-    @POST("users")
+    @POST("users/register")
     suspend fun signupNewsUser(@Body user: SignupModel) : Response<Any>
 
-    @POST("auth")
+    @POST("users/login")
     suspend fun loginExistingUser(@Body user: LoginModel) : Response<LoginResponse>
 
-    @GET("activity/getOneActivity")
-    suspend fun getARandomActivity() : Response<ActivityResponse>
+    @GET("activity")
+    suspend fun getARandomActivity(
+        @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
+    ) : Response<ActivityResponse>
+
+    @GET("users/:userID ")
+    suspend fun getUserDetails(
+        @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
+    ) : Response<UserResponse>
+
+    @GET("feed")
+    suspend fun getAllPosts(
+        @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
+    ) : Response<Any>
 
     companion object {
         private val okHttpClient = OkHttpClient.Builder()

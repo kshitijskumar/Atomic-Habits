@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.atomichabits.databinding.ActivityMainBinding
+import com.example.atomichabits.utils.Injector
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity() {
                         .putString("token", null)
                         .putBoolean("isLoggedIn", false)
                         .apply()
+
+                    Injector.getInjector().removeTokenForUser()
 
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)

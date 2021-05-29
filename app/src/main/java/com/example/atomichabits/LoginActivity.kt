@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.atomichabits.databinding.ActivityLoginBinding
+import com.example.atomichabits.utils.Injector
 import com.example.atomichabits.utils.Resource
 import com.example.atomichabits.utils.UtilFunctions.showToast
 import com.example.atomichabits.viewmodels.AuthViewModel
@@ -88,12 +89,16 @@ class LoginActivity : AppCompatActivity() {
             .putString("token", token)
             .putBoolean("isLoggedIn", true)
             .apply()
+        Injector.getInjector().storeTokenForUser(token)
     }
 
     private fun isLoggedIn() : Boolean {
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         val isValidToken = sharedPreferences.getString("token", null)
 
+        isValidToken?.let {
+            Injector.getInjector().storeTokenForUser(it)
+        }
         return isLoggedIn && (isValidToken != null)
     }
     private fun showLoading() {

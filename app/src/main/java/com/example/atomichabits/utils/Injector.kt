@@ -12,6 +12,18 @@ class Injector private constructor() {
     private var authRepo: AuthRepository? = null
     private var userRepo: UserRepository? = null
 
+    private var token: String? = null
+
+    fun storeTokenForUser(token: String) {
+        this.token = token
+    }
+
+    fun removeTokenForUser() {
+        token = null
+    }
+
+    fun getTokenForUser() = token
+
     fun provideApiService() : ApiService {
         if(apiService == null) {
             apiService = ApiService.apiService()
