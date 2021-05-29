@@ -58,9 +58,11 @@ class MainActivity : AppCompatActivity() {
                     sharedPreferences.edit()
                         .putString("token", null)
                         .putBoolean("isLoggedIn", false)
+                        .putString("id", null)
                         .apply()
 
                     Injector.getInjector().removeTokenForUser()
+                    Injector.getInjector().removeIdForUser()
 
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)

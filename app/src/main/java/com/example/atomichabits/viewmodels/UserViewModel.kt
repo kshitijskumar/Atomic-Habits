@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.atomichabits.data.repository.UserRepository
 import com.example.atomichabits.data.response.ActivityResponse
 import com.example.atomichabits.data.response.PostResponse
+import com.example.atomichabits.data.response.UserResponse
 import com.example.atomichabits.utils.Injector
 import com.example.atomichabits.utils.Resource
 import kotlinx.coroutines.flow.collect
@@ -25,6 +26,9 @@ class UserViewModel(
 
     private val _posts = MutableLiveData<Resource<List<PostResponse>>>()
     val posts: LiveData<Resource<List<PostResponse>>> = _posts
+
+    private val _userDetails = MutableLiveData<Resource<UserResponse>>()
+    val userDetails: LiveData<Resource<UserResponse>> = _userDetails
 
     init {
         if(isTask) {
@@ -47,6 +51,12 @@ class UserViewModel(
                     _upload.postValue(it)
                 }
             }
+        }
+    }
+
+    fun fetchUserDetails() = viewModelScope.launch {
+        repo.fetchUserDetails().collect {
+            _userDetails.postValue(it)
         }
     }
 

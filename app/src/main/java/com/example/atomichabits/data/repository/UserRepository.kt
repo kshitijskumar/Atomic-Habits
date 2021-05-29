@@ -20,4 +20,8 @@ class UserRepository(
         delay(1500L)
         emit(Resource.Success("Success"))
     }
+
+    suspend fun fetchUserDetails() = safeApiCall {
+        api.getUserDetails()
+    }
 }

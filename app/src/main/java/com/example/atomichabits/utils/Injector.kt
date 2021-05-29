@@ -13,6 +13,7 @@ class Injector private constructor() {
     private var userRepo: UserRepository? = null
 
     private var token: String? = null
+    private var id: String? = null
 
     fun storeTokenForUser(token: String) {
         this.token = token
@@ -23,6 +24,18 @@ class Injector private constructor() {
     }
 
     fun getTokenForUser() = token
+
+    fun storeIdForUser(id: String) {
+        this.id = id
+    }
+
+    fun removeIdForUser() {
+        id = null
+    }
+
+    fun getIdForUser() = id
+
+
 
     fun provideApiService() : ApiService {
         if(apiService == null) {

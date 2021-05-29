@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Resource.Success -> {
                     stopLoading()
-                    storeTokenInPreferences(it.data.token!!)
+                    storeTokenInPreferences(it.data.token!!, it.data._id!!)
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -84,22 +84,28 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun storeTokenInPreferences(token: String) {
+    private fun storeTokenInPreferences(token: String, id: String) {
         sharedPreferences.edit()
             .putString("token", token)
             .putBoolean("isLoggedIn", true)
+            .putString("id", id)
             .apply()
         Injector.getInjector().storeTokenForUser(token)
+        Injector.getInjector().storeIdForUser(id)
     }
 
     private fun isLoggedIn() : Boolean {
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         val isValidToken = sharedPreferences.getString("token", null)
+        val isValidId = sharedPreferences.getString("id", null)
 
         isValidToken?.let {
             Injector.getInjector().storeTokenForUser(it)
         }
-        return isLoggedIn && (isValidToken != null)
+        isValidId?.let {
+            Injector.getInjector().storeIdForUser(it)
+        }
+        return isLoggedIn && (isValidToken != null) && (isValidId != null)
     }
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE

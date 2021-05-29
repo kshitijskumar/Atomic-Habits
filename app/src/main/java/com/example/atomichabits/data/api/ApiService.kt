@@ -12,10 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -31,9 +28,10 @@ interface ApiService {
         @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
     ) : Response<ActivityResponse>
 
-    @GET("users/:userID ")
+    @GET("users/{userId} ")
     suspend fun getUserDetails(
-        @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser()
+        @Header("x-auth-token") token: String? = Injector.getInjector().getTokenForUser(),
+        @Path("userId") id: String? = Injector.getInjector().getIdForUser()
     ) : Response<UserResponse>
 
     @GET("feed")
