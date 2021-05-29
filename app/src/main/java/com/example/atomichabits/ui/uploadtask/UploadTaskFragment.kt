@@ -98,7 +98,7 @@ class UploadTaskFragment : Fragment() {
         viewModel.upload.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    requireContext().showToast("Upload successfully.")
+                    requireContext().showToast("Upload successful.")
                     findNavController().navigateUp()
                 }
                 is Resource.Error -> requireContext().showToast(it.errorMsg)
