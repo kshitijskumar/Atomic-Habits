@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.atomichabits.databinding.ActivityMainBinding
@@ -36,16 +37,26 @@ class MainActivity : AppCompatActivity() {
                 R.id.feedFragment -> {
                     setupToolBarTitle("Feed")
                     binding.bottomNavView.visibility = View.VISIBLE
+                    binding.toolBar.navigationIcon = null
                 }
                 R.id.taskFragment -> {
                     setupToolBarTitle("Task")
                     binding.bottomNavView.visibility = View.VISIBLE
+                    binding.toolBar.navigationIcon = null
                 }
                 R.id.profileFragment -> {
                     setupToolBarTitle("Profile")
                     binding.bottomNavView.visibility = View.VISIBLE
+                    binding.toolBar.navigationIcon = null
                 }
-                R.id.uploadTaskFragment -> binding.bottomNavView.visibility = View.GONE
+                R.id.uploadTaskFragment -> {
+                    setupToolBarTitle("Upload your progress")
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.toolBar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_back)
+                    binding.toolBar.setNavigationOnClickListener {
+                        navController.navigateUp()
+                    }
+                }
             }
         }
     }
