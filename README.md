@@ -25,4 +25,12 @@ Our project "Atomic Habits", aims at providing a way for users to engage in refr
 <img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/task.jpg" height=300>&nbsp;&nbsp;
 <img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/upload_task.jpg" height=300>&nbsp;&nbsp;
 <img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/profile.jpg" height=300>&nbsp;&nbsp;
+
+### Website:
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/websplash.png" height=200>&nbsp;&nbsp;
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/weblogin.png" height=200>&nbsp;&nbsp;
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/webfeed.png" height=200>&nbsp;&nbsp;
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/webtask.png" height=200>&nbsp;&nbsp;
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/webupload.png" height=200>&nbsp;&nbsp;
+<img src="https://github.com/kshitijskumar/Atomic-Habits/blob/main/atomichabitsscreenshots/webprofile.png" height=200>&nbsp;&nbsp;
  
